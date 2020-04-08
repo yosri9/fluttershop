@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "620571353399",
+    "firebase_url": "https://fluttershop-69400.firebaseio.com",
+    "project_id": "fluttershop-69400",
+    "storage_bucket": "fluttershop-69400.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620571353399:android:5635764ba45794d1917ab2",
+        "android_client_info": {
+          "package_name": "hyperionstudios.com.au.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620571353399-294kmno3vv918f773ab28qcalojc1u5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhOf0C63SGMnGsIgVQiJRFW6OU5yktMzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620571353399-294kmno3vv918f773ab28qcalojc1u5l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "620571353399-ldgl5t9mv6esl7lnm2q5ees8cvl4h5j5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "hyperionstudios.com.au.flutterapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

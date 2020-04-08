@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>620571353399-ldgl5t9mv6esl7lnm2q5ees8cvl4h5j5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.620571353399-ldgl5t9mv6esl7lnm2q5ees8cvl4h5j5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCTCLIHXxe0EfyvHA0AmHYq_YPPQbKhkas</string>
+	<key>GCM_SENDER_ID</key>
+	<string>620571353399</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>hyperionstudios.com.au.flutterapp</string>
+	<key>PROJECT_ID</key>
+	<string>fluttershop-69400</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fluttershop-69400.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:620571353399:ios:4d92fd1fa54ccd87917ab2</string>
+	<key>DATABASE_URL</key>
+	<string>https://fluttershop-69400.firebaseio.com</string>
+</dict>
+</plist>
