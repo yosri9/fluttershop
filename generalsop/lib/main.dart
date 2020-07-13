@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:generalsop/api/helpers_api.dart';
 import 'package:generalsop/api/product_api.dart';
 import 'package:generalsop/product/product.dart';
 import 'api/authentication.dart';
@@ -24,7 +25,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  ProductApi productApi=ProductApi();
+  HelpersApi helpersApi=HelpersApi();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +36,8 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         child: Center(
           child: FutureBuilder(
-            future:    productApi.fetchproduct(75),
-            builder: (BuildContext context,AsyncSnapshot <Product> snapShot){
-              print("");
+            future:   helpersApi.fetchTags(4),
+            builder: (BuildContext context,AsyncSnapshot  snapShot){
 
               switch(snapShot.connectionState){
                 case ConnectionState.none:
@@ -60,7 +61,12 @@ class _HomePageState extends State<HomePage> {
                       return _error('no data');
                     }else{
 
-                         return _drawProduct(snapShot.data)   ;
+                         return ListView.builder(
+                             itemBuilder: (BuildContext context, int position){
+                               return _drawCard(snapShot.data[position]);
+                             },
+                             itemCount:snapShot.data.length
+                         )   ;
 
 
 
@@ -75,6 +81,15 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+  _drawCard(dynamic item){
+    return Card(
+      child: Padding(
+          padding:EdgeInsets.all(16),
+        child: Text(item.tag_name),
+      ),
+    );
+  }
+
   _drawProduct(Product product){
     return Card(
       child:Padding(
