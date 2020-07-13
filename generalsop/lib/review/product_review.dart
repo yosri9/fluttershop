@@ -12,7 +12,7 @@ class ProductReview{
     this.review_id=jsonObject['review_id'];
     this.stars=jsonObject['stars'];
     this.review=jsonObject['review'];
-    this.reviewer=jsonObject['reviewer'];
+    this.reviewer=Reviewer.fromJson(jsonObject['reviewer']);
   }
 
 
