@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'dart:core';
 
+import 'package:generalsop/exceptions/exception.dart';
 import 'package:generalsop/product/product_category.dart';
 import 'package:generalsop/product/product_tag.dart';
 import 'package:generalsop/product/product_unit.dart';
@@ -33,6 +34,25 @@ class Product {
       this.reviews);
 
   Product.fromJson(Map<String,dynamic> jsonObject) {
+    assert(jsonObject['product_id']!=null,'Product ID is null');
+    assert(jsonObject['product_title']!=null,'Product title is null');
+    assert(jsonObject['product_descrption']!=null,'Product description is null');
+    assert(jsonObject['product_price']!=null,'Product price is null');
+
+    if(jsonObject['product_id']==null){
+      throw PropertyRequired('Product ID');
+    }
+    if(jsonObject['product_title']==null){
+      throw PropertyRequired('Product Title');
+    }
+    if(jsonObject['product_descrption']==null){
+      throw PropertyRequired('Product Description');
+    }
+    if(jsonObject['product_price']==null){
+      throw PropertyRequired('Product price');
+    }
+
+
     this.product_id = jsonObject['product_id'];
 
     this.product_title = jsonObject['product_title'];
@@ -51,8 +71,11 @@ class Product {
 
     this.productCategory =
         ProductCategory.fromJson(jsonObject['product_category']);
-
     this.tags = [];
+    if(jsonObject['product_tags']==null){
+      _setTags(jsonObject['product_tags']);
+    }
+
     if (jsonObject['product_tags'] != null) {
       _setTags(jsonObject['product_tags']);
     } else {

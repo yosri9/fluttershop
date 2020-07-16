@@ -2,6 +2,9 @@ import 'dart:core';
 
 import 'dart:core';
 
+import 'package:connectivity/connectivity.dart';
+import 'package:generalsop/exceptions/exception.dart';
+
 
 class ApiUtl{
 
@@ -25,6 +28,14 @@ class ApiUtl{
    return MAIN_API_URL+'countries/'+id.toString()+'/states';
   }
 
+
+
+  }
+Future <void> checkInternet() async{
+  var connectivityResult = await (Connectivity().checkConnectivity());
+  if (connectivityResult == ConnectivityResult.mobile && connectivityResult == ConnectivityResult.wifi) {
+    throw NoInternetConnection();
+  }
 
 
 }

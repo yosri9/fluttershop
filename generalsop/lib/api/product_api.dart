@@ -6,7 +6,7 @@ import 'dart:convert';
 class ProductApi {
   Map<String, String> headers = {'Accept': 'application/json'};
   Future<List<Product>> fetchProducts(int page) async {
-
+    await checkInternet();
     String url = ApiUtl.PRODUCTS;
 
     http.Response response = await http.get(url, headers: headers);
@@ -29,6 +29,7 @@ class ProductApi {
     return null;
   }
   Future<Product>fetchProduct(int product_id) async{
+    await checkInternet();
     String url =ApiUtl.PRODUCT +product_id.toString();
     http.Response response=await http.get(url,headers: headers);
     if(response.statusCode==200){
