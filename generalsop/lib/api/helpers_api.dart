@@ -11,9 +11,9 @@ import 'dart:convert';
 class HelpersApi {
   Map<String, String> headers = {'Accept': 'application/json'};
 
-  Future<List<ProductCategory>> fetchCategories(int page) async {
+  Future<List<ProductCategory>> fetchCategories() async {
     List<ProductCategory> categories = [] ;
-    String url = ApiUtl.CATEGORIES + '?page=' + page.toString();
+    String url = ApiUtl.CATEGORIES ;
     http.Response response = await http.get(url, headers: headers);
     switch (response.statusCode) {
       case 200:

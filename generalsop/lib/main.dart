@@ -5,6 +5,7 @@ import 'package:generalsop/product/product.dart';
 import 'package:generalsop/product/product_category.dart';
 import 'package:generalsop/screens/home_page.dart';
 import 'package:generalsop/screens/onboarding/onboarding.dart';
+import 'package:generalsop/screens/utilities/screen_utilities.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api/authentication.dart';
 import 'exceptions/exception.dart';
@@ -32,6 +33,43 @@ class GeneralShop extends StatelessWidget {
       title: 'General Shop',
       home: homePage,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.white,
+        backgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          actionsIconTheme:IconThemeData(
+              color: ScreenUtilities.textColor
+          ) ,
+          elevation: 0,
+          textTheme: TextTheme(
+              title: TextStyle(
+                  color: ScreenUtilities.textColor,
+                  fontFamily: "QuickSand",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 22
+              )
+          ),
+        ),
+        tabBarTheme: TabBarTheme(
+          labelColor: ScreenUtilities.textColor,
+          labelStyle: TextStyle(
+            fontFamily: "Quicksnad",
+            fontWeight: FontWeight.w700,
+            fontSize: 22,
+          ),
+          labelPadding: EdgeInsets.only( left: 16 , right: 16 , bottom: 12 , top: 16 ),
+          indicatorSize: TabBarIndicatorSize.label,
+          unselectedLabelColor: ScreenUtilities.unselected,
+          unselectedLabelStyle: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+            fontFamily: "Quicksand"
+          ),
+
+        )
+
+      ),
     );
   }
 }

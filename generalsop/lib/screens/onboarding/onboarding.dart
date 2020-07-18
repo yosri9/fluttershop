@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:generalsop/screens/home_page.dart';
 import 'package:generalsop/screens/onboarding/onboarding_model.dart';
 import 'package:generalsop/screens/onboarding/onboarding_screen.dart';
-import 'package:generalsop/screens/onboarding/utilities/screen_utilities.dart';
+
+import 'package:generalsop/screens/utilities/screen_utilities.dart';
+import 'package:generalsop/screens/utilities/size_config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoarding extends StatefulWidget {
   @override
@@ -29,6 +33,8 @@ class _OnBoardingState extends State<OnBoarding> {
         title: "Enjoy Purchase",
         description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
   ];
+  ScreenConfig screenConfig;
+  WidgetSize widgetSize;
 
   @override
   void initState() {
@@ -47,6 +53,10 @@ class _OnBoardingState extends State<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
+     screenConfig = ScreenConfig(context);
+     widgetSize = WidgetSize(screenConfig);
+    print(screenConfig.screenType);
+    print(screenConfig.screenWidth);
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
 
@@ -98,22 +108,30 @@ class _OnBoardingState extends State<OnBoarding> {
   }
 
   Widget _showButton(){
+    double offset = ( screenConfig == ScreenType.SMALL ) ? 0.05 : 0.1;
     return    Container(
       child: Transform.translate(
-        offset: Offset(0, -screenHeight * 0.1),
+        offset: Offset(0, -( offset*screenHeight )),
         child: SizedBox(
           width: screenWidth * 0.75,
-          height: 48,
+          height: widgetSize.buttonHeight,
           child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(34)),
             color: ScreenUtilities.mainBlue,
-            onPressed: () {},
+            onPressed: () async {
+              var pref = await SharedPreferences.getInstance();
+              pref.setBool('is_seen', true);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
             child: Text('START',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 22,
+                    fontSize: widgetSize.buttonFontSize,
                     letterSpacing: 3)),
           ),
         ),
@@ -133,8 +151,8 @@ class _OnBoardingState extends State<OnBoarding> {
                 ? ScreenUtilities.mainBlue
                 : ScreenUtilities.lightGrey,
           ),
-          width: 35,
-          height: 6,
+          width: widgetSize.pagerDotsWidth,
+          height: widgetSize.pagerDotsHeight,
           margin: (i == qty - 1)
               ? EdgeInsets.only(right: 0)
               : EdgeInsets.only(right: 24),
