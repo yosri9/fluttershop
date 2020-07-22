@@ -122,4 +122,9 @@ class Product {
     }
 
   }
+  String featuredImage(){
+    if( this.images.length >0){
+      return this.images[0];
+    }
+  }
 }
