@@ -37,6 +37,20 @@ class GeneralShop extends StatelessWidget {
         primaryColor: Colors.white,
         backgroundColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
+        textTheme: TextTheme(
+          headline: TextStyle(
+            fontFamily: "Quicksnad",
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: ScreenUtilities.textColor
+          ),
+          subhead: TextStyle(
+            fontFamily: "Quicksnad",
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
+            color: ScreenUtilities.textColor
+          ),
+        ),
         appBarTheme: AppBarTheme(
           actionsIconTheme:IconThemeData(
               color: ScreenUtilities.textColor
