@@ -7,11 +7,14 @@ import 'package:generalsop/api/helpers_api.dart';
 import 'package:generalsop/product/home_product.dart';
 import 'package:generalsop/product/product.dart';
 import 'package:generalsop/product/product_category.dart';
+import 'package:generalsop/screens/single_product.dart';
 import 'package:generalsop/screens/streams/categories_stream.dart';
 import 'package:generalsop/screens/streams/dots_stream.dart';
 import 'package:generalsop/screens/utilities/helpers_widgets.dart';
 import 'package:generalsop/screens/utilities/screen_utilities.dart';
 import 'package:generalsop/screens/utilities/size_config.dart';
+
+import 'cart_screen.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,6 +28,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   PageController _pageController;
   HelpersApi helpersApi = HelpersApi();
+
+  ValueNotifier<int> dotsIndex = ValueNotifier(1);
 
 //  DotsStream  dotsStream = DotsStream();
   HomeProductBloc homeProductBloc = HomeProductBloc();
@@ -89,6 +94,28 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     tabController =
         TabController(initialIndex: 0, length: categories.length, vsync: this);
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('My Name'),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200
+              ),
+            ),
+            ListTile(
+              title: Text('Cart'),
+              leading: Icon(Icons.card_travel),
+              trailing: Icon(Icons.arrow_forward_ios),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute( builder: (context) => CartScreen()));
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -194,11 +221,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               scrollDirection: Axis.horizontal,
               itemCount: topProducts.length,
               onPageChanged: (int index) {
+                dotsIndex.value=index;
               },
               itemBuilder: (context, position) {
                 return InkWell(
                   onTap: (){
-                    print(topProducts[position].product_title);
+                    _gotoSingleProduct(topProducts[position], context);
                   },
                   child: Card(
                     margin: EdgeInsets.only(left: 3, right: 4),
@@ -206,6 +234,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(10)),
                     clipBehavior: Clip.hardEdge,
                     child: Image(
+                      loadingBuilder: ( context , image , ImageChunkEvent loadingProgress){
+                        if(loadingProgress == null){
+                          return image;
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
                       fit: BoxFit.cover,
                       image:
                       NetworkImage(topProducts[position].featuredImage()),
@@ -214,6 +250,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 );
               },
             ),
+          ),
+          ValueListenableBuilder(
+            valueListenable: dotsIndex,
+            builder: ( context , value , _){
+              return Container(
+                padding: EdgeInsets.only( top: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: _drawDots(topProducts.length, value)
+                ),
+              );
+            },
           ),
           Flexible(
             child: Padding(
@@ -228,7 +276,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ), itemBuilder: (context, position) {
                 return InkWell(
                   onTap: (){
-                    print(products[position].product_title);
+                    _gotoSingleProduct(products[position], context);
                   },
                   child: Column(
                     children: <Widget>[
@@ -240,6 +288,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             shape: BoxShape.rectangle
                           ),
                           child: Image(
+                            loadingBuilder: ( context , image , ImageChunkEvent loadingProgress){
+                              if(loadingProgress == null){
+                                return image;
+                              }
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            },
                             image: NetworkImage(
                                 products[position].featuredImage()
                             ),
@@ -275,26 +331,33 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-//  List<Widget> _drawDots(int qty , int index) {
-//    List<Widget> widgets = [];
-//    for (int i = 0; i < qty; i++) {
-//      widgets.add(
-//        Container(
-//          decoration: BoxDecoration(
-//            borderRadius: BorderRadius.circular(5),
-//            color: (i == index.value)
-//                ? ScreenUtilities.mainBlue
-//                : ScreenUtilities.lightGrey,
-//          ),
-//          width: 10,
-//          height: 10,
-//          margin: (i == qty - 1)
-//              ? EdgeInsets.only(right: 0)
-//              : EdgeInsets.only(right: 10),
-//        ),
-//      );
-//    }
-//    return widgets;
-//  }
+  List<Widget> _drawDots(int qty , int index) {
+    List<Widget> widgets = [];
+    for (int i = 0; i < qty; i++) {
+      widgets.add(
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: (i == index)
+                ? ScreenUtilities.mainBlue
+                : ScreenUtilities.lightGrey,
+          ),
+          width: 10,
+          height: 10,
+          margin: (i == qty - 1)
+              ? EdgeInsets.only(right: 0)
+              : EdgeInsets.only(right: 10),
+        ),
+      );
+    }
+    return widgets;
+  }
+  void _gotoSingleProduct( Product product , BuildContext context  ){
+    Navigator.push(context, MaterialPageRoute(
+      builder: ( context ){
+        return SingleProduct( product );
+      }
+    ));
+  }
 
 }

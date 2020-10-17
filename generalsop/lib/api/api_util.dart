@@ -16,6 +16,8 @@ class ApiUtl{
   static const String AUTH_LOGIN=MAIN_API_URL+'auth/login';
   static const String PRODUCTS  = MAIN_API_URL+'products';
   static const String PRODUCT  = MAIN_API_URL+'products/';
+
+  static const String CART = ApiUtl.MAIN_API_URL + 'carts' ;
   static  String CATEGORY_PRODUCTS(int id , int page){
    return MAIN_API_URL+'categories/'+ id.toString()+'/products?page='+ page.toString();
   }

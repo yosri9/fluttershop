@@ -48,7 +48,29 @@ class GeneralShop extends StatelessWidget {
             fontFamily: "Quicksnad",
             fontWeight: FontWeight.w700,
             fontSize: 14,
-            color: ScreenUtilities.textColor
+            color: ScreenUtilities.textColor,
+          ),
+          display1: TextStyle(
+            fontFamily: "Quicksnad",
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: ScreenUtilities.darkerGreyText,
+          ),
+          display2: TextStyle(
+            fontFamily: "Quicksnad",
+            fontWeight: FontWeight.w700,
+            fontSize: 18,
+            height: 1.75,
+            letterSpacing: 1.5,
+            color: ScreenUtilities.darkerGreyText,
+          ),
+          display3: TextStyle(
+            fontFamily: "Nunito",
+            fontWeight: FontWeight.w700,
+            fontSize: 18,
+            height: 1.75,
+            letterSpacing: 1.5,
+            color: ScreenUtilities.textColor,
           ),
         ),
         appBarTheme: AppBarTheme(
@@ -81,6 +103,9 @@ class GeneralShop extends StatelessWidget {
             fontFamily: "Quicksand"
           ),
 
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: ScreenUtilities.mainBlue
         )
 
       ),
